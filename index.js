@@ -1,7 +1,7 @@
 'use strict';
-
+require('dotenv').config()
 const line = require('@line/bot-sdk');
-const express = require('express');
+const express = require('express')
 
 // create LINE SDK config from env variables
 const config = {
@@ -47,3 +47,7 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`listening on ${port}`);
 });
+
+app.get('/', (req, res) => {
+  res.send(process.env.CHANNEL_SECRET)
+})
