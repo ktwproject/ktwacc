@@ -1,7 +1,9 @@
 'use strict';
 require('dotenv').config()
+const functions = require('firebase-functions');
 const line = require('@line/bot-sdk');
 const express = require('express')
+const cors = require('cors')
 
 // create LINE SDK config from env variables
 const config = {
@@ -15,6 +17,7 @@ const client = new line.Client(config);
 // create Express app
 // about Express itself: https://expressjs.com/
 const app = express();
+app.use(cors());
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
@@ -51,3 +54,5 @@ app.listen(port, () => {
 app.get('/', (req, res) => {
   res.send(process.env.CHANNEL_SECRET)
 })
+
+exports.app = functions.https.onRequest(app)
