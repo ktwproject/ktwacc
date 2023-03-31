@@ -44,7 +44,10 @@ function handleEvent(event) {
   if (event.type === 'message') {
     if (event.message.type === 'text') {
       if (event.message.text === 'push') {
-        return client.pushMessage('U829438ae79a8afd36252dcaedf042f93', messageAction(event.message.text));
+        return client.pushMessage('U62b1a1d59c92a556ae03c52e63de6b3d', messageAction(event.message.text));
+      }
+      else if (event.message.text === 'multicast') {
+        return client.multicast(["U829438ae79a8afd36252dcaedf042f93","Ucced97cf8e897a8c737b105b541265ca"],messageAction(event.message.text));
       }
       else if (event.message.text === 'broadcast') {
         return client.broadcast(messageAction(event.message.text));
@@ -63,18 +66,18 @@ function handleEvent(event) {
       }
     }
     else if (event.message.type === 'image') {
-      axios.get('https://api-data.line.me/v2/bot/message/' + event.message.id + '/content/preview', { headers: { 'Authorization': 'Bearer ' + config.channelAccessToken } })
-        .then(function (response) {
-          // handle success
-          console.log(response.data);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .finally(function () {
-          // always executed
-        });
+      // axios.get('https://api-data.line.me/v2/bot/message/' + event.message.id + '/content/preview', { headers: { 'Authorization': 'Bearer ' + config.channelAccessToken } })
+      //   .then(function (response) {
+      //     // handle success
+      //     console.log(response.data);
+      //   })
+      //   .catch(function (error) {
+      //     // handle error
+      //     console.log(error);
+      //   })
+      //   .finally(function () {
+      //     // always executed
+      //   });
       // axios.request(getContent).then(function (response) {
       //   console.log(response.data);
       // }).catch(function (error) {
